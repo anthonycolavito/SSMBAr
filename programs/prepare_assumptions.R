@@ -11,10 +11,10 @@ library(tidyverse)
 setwd("/Users/anthony/Desktop/SSMBAr/")
 
 #Load files
-hist2024 <- read.csv("./data/2024TR Historical Data.csv")
-hist_awi_cpi2024 <- read.csv("./data/2024TR AWI and CPI Changes.csv")
-cohort_life_expectancy2024 <- read.csv("./data/Cohort Life Expectancy 2024TR.csv")
-scaled_earnings2024 <- read.csv("./data/2024 earnings scaling factors.csv")
+hist <- read.csv("./data/2024TR Historical Data.csv")
+hist_awi_cpi <- read.csv("./data/2024TR AWI and CPI Changes.csv")
+cohort_life_expectancy <- read.csv("./data/Cohort Life Expectancy 2024TR.csv")
+scaled_earning <- read.csv("./data/2024 earnings scaling factors.csv")
 
 #Calculate historical and projected CPI using growth rate in CPI.
 #Index starts at 100 in 1960
@@ -95,6 +95,8 @@ for(i in (awi_proj_start + 1):nrow(hist_and_proj_data)) {
   hist_and_proj_data$nra_62[i] <- hist_and_proj_data$nra_62[i-1]
 }
 
-assumptions <- hist_and_proj_data
+assumptions <- hist_and_proj_data %>% pivot_longer(cols = c(!year), names_to="parameter", values_to="value")
+
+scaled_earnings <- scaled_earnings2024 %>% pivot_longer(cols = c(!age), names_to="earn_type", values_to="value")
 
 saveRDS(assumptions, "./data/assumptions.rds")
