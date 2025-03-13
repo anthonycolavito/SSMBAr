@@ -2,6 +2,12 @@ library(tidyverse)
 
 setwd("/Users/anthony/Desktop/SSMBAr")
 
+#Load the prepare_assumptions function
+source("./programs/prepare_assumptions.R")
+
+#Output assumptions datasets to be used for creating hypothetical workers
+prepare_assumptions()
+
 birth_cohorts <- seq(1945, 2030, by = 5)
 sexes <- c("male", "female")
 earn_types <- c("none","verylow","low","medium","high","max")
