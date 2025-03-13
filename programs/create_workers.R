@@ -1,5 +1,7 @@
 library(tidyverse)
 
+setwd("/Users/anthony/Desktop/SSMBAr")
+
 birth_cohorts <- seq(1945, 2030, by = 5)
 sexes <- c("male", "female")
 earn_types <- c("none","verylow","low","med","high","max")
@@ -15,4 +17,7 @@ hypo_workers <- expand_grid(
   id = row_number()
 ) 
 
-print(hypo_workers, n=10)
+#Load Assumptions
+assumptions <- readRDS("./data/assumptions.RDS")
+scaled_earnings <- read_csv("./data/2024 earnings scaling factors.csv")
+
